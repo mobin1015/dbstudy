@@ -142,4 +142,21 @@ SELECT E.EMPLOYEE_ID AS 사원번호
      , M.LAST_NAME   AS 매니저명
   FROM EMPLOYEES M INNER JOIN EMPLOYEES E
     ON M.EMPLOYEE_ID = E.MANAGER_ID;
+
+-- 9. 같은 부서내에서 나보다 급여를 더 많이 받는 사원을 조회하시오.
+-- 관계
+-- 나는 여러 사원과 관계를 맺는다.
+-- 나(EMPLOYEES ME)               너님들(EMPLOYEES YOU)
+-- 같은 부서의 사원만 조인하기 위해서 부서 번호로 조인조건을 생성함
+SELECT ME.EMPLOYEE_ID     AS 사원번호
+     , ME.LAST_NAME    AS 사원명
+     , ME.SALARY       AS 급여
+     , YOU.EMPLOYEE_ID AS 너사원번호
+     , YOU.LAST_NAME   AS 너사원명
+     , YOU.SALARY      AS 너급여
+  FROM EMPLOYEES ME INNER JOIN EMPLOYEES YOU
+    ON ME.DEPARTMENT_ID = YOU.DEPARTMENT_ID
+ WHERE ME.SALARY < YOU.SALARY;
+   
+    
     
